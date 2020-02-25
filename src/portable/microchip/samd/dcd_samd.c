@@ -50,11 +50,11 @@ static inline void prepare_setup(void)
 // Setup the control endpoint 0.
 static void bus_reset(void)
 {
-  // Max size of packets is 64 bytes.
+  // Max size of packets is 8 bytes.
   UsbDeviceDescBank* bank_out = &sram_registers[0][TUSB_DIR_OUT];
-  bank_out->PCKSIZE.bit.SIZE = 0x3;
+  bank_out->PCKSIZE.bit.SIZE = 0x0;
   UsbDeviceDescBank* bank_in = &sram_registers[0][TUSB_DIR_IN];
-  bank_in->PCKSIZE.bit.SIZE = 0x3;
+  bank_in->PCKSIZE.bit.SIZE = 0x0;
 
   UsbDeviceEndpoint* ep = &USB->DEVICE.DeviceEndpoint[0];
   ep->EPCFG.reg = USB_DEVICE_EPCFG_EPTYPE0(0x1) | USB_DEVICE_EPCFG_EPTYPE1(0x1);
@@ -86,7 +86,7 @@ void dcd_init (uint8_t rhport)
 
   // Configure registers
   USB->DEVICE.DESCADD.reg = (uint32_t) &sram_registers;
-  USB->DEVICE.CTRLB.reg = USB_DEVICE_CTRLB_SPDCONF_FS;
+  USB->DEVICE.CTRLB.reg = USB_DEVICE_CTRLB_SPDCONF_LS;
   USB->DEVICE.CTRLA.reg = USB_CTRLA_MODE_DEVICE | USB_CTRLA_ENABLE | USB_CTRLA_RUNSTDBY;
   while (USB->DEVICE.SYNCBUSY.bit.ENABLE == 1) {}
 

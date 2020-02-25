@@ -173,7 +173,7 @@
 //--------------------------------------------------------------------
 
 #ifndef CFG_TUD_ENDPOINT0_SIZE
-  #define CFG_TUD_ENDPOINT0_SIZE   64
+  #define CFG_TUD_ENDPOINT0_SIZE  8
 #endif
 
 #ifndef CFG_TUD_CDC
